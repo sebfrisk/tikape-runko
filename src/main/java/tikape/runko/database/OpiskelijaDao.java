@@ -24,7 +24,7 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
     @Override
     public Opiskelija findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija WHERE id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Amne WHERE namn = ?");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -46,10 +46,10 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
     }
 
     @Override
-    public List<Opiskelija> findAll() throws SQLException {
+    public List<Amne> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Amne");
 
         ResultSet rs = stmt.executeQuery();
         List<Opiskelija> opiskelijat = new ArrayList<>();
