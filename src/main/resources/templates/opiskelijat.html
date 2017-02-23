@@ -7,12 +7,19 @@
     </head>
 
     <body>
-        <h1>Hei opiskelijat!</h1>
+        <h1>Hej folk!</h1>
 
         <ol>
             <li th:each="opiskelija: ${opiskelijat}">
-                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">linkki</a>
+                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">link</a>
             </li>
+           
+            
         </ol>
+        <p>Lägg till användare.</p>
+        <form method="POST">
+            <input type="text" name ="Namn"/>
+            <input type="submit" value="Lägg till"/>
+        </form>
     </body>
 </html>
