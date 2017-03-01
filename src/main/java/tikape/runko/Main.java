@@ -12,30 +12,20 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Database database = new Database("jdbc:sqlite:forum.db");
-//        database.init();
 
         AmneDao amnen = new AmneDao(database);
         TradDao tradar = new TradDao(database);
-<<<<<<< HEAD
-        
-=======
->>>>>>> 64520b3f598b8bab09154be6b19f111f4a70fdd9
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("amnen", amnen.findAll());
-            
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
         get("/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-<<<<<<< HEAD
             map.put("tradar", tradar.findAll());
-=======
-            map.put("opiskelijat", tradar.findAll());
->>>>>>> 64520b3f598b8bab09154be6b19f111f4a70fdd9
 
             return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());
@@ -52,10 +42,10 @@ public class Main {
             res.redirect("/");
             return "ok";
         });
-        
+
         post("/:id", (req, res) -> {
             tradar.addTrad(req.queryParams("Name"));
-//            res.redirect("/");
+            res.redirect("/");
             return "ok";
         });
     }

@@ -9,13 +9,6 @@
     <body>
         <h1>Välkommen till dåliga forumet!</h1>
 
-<<<<<<< HEAD
-=======
-        <p>och ... <span th:text="${viesti}">jotain?</span></p>
-
-        <p><a href="/opiskelijat">Int vet jag.</a></p>
->>>>>>> 64520b3f598b8bab09154be6b19f111f4a70fdd9
-        
         <ul>
             <li th:each="amne: ${amnen}">
                 <p><a th:href="${'/' + amne.id}"><span th:text="${amne.id}">1</span></a>

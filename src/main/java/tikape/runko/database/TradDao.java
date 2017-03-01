@@ -75,7 +75,23 @@ public class TradDao implements Dao<Trad, Integer> {
 
     @Override
     public List<Trad> findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad");
+
+        ResultSet rs = stmt.executeQuery();
+        List<Trad> tradar = new ArrayList<>();
+        while (rs.next()) {
+            Integer id = rs.getInt("id");
+            String nimi = rs.getString("namn");
+
+            tradar.add(new Trad(id, nimi));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return tradar;
     }
 
 }
