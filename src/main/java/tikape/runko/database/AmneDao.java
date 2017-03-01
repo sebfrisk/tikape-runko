@@ -73,6 +73,14 @@ public class AmneDao implements Dao<Amne, Integer> {
     public void delete(Integer key) throws SQLException {
         // ei toteutettu
     }
+    
+    public void addAmne(String nyttamne) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Amne (namn) VALUES ('"+nyttamne+"')");
+        stmt.execute();
+        stmt.close();
+        connection.close();
+    }
 
 }
 

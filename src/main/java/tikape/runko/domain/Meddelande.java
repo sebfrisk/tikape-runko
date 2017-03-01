@@ -6,15 +6,18 @@ import java.util.Date;
 
 public class Meddelande {
     private Integer id;
-    private String namn;
-    private String substans;
+    private String anvandarnamn;
+    private String innehall;
     private Date tid;
     
-    public Meddelande(String namn, String substans) {
-        this.namn = namn;
-        this.substans = substans;
-        this.tid = Date.
+    public Meddelande(String namn, String substans, Date tid) {
+        this.anvandarnamn = namn;
+        this.innehall = substans;
+        this.tid = tid;
+        
     }
+    
+    
     
     
 }

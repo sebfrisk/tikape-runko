@@ -25,7 +25,7 @@ public class TradDao implements Dao<Trad, Integer> {
         List<Trad> tradar = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("id");
-            String nimi = rs.getString("nimi");
+            String nimi = rs.getString("namn");
 
             tradar.add(new Trad(id, nimi));
         }
@@ -63,6 +63,14 @@ public class TradDao implements Dao<Trad, Integer> {
         connection.close();
 
         return o;
+    }
+    
+    public void addTrad(String namn) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Trad (namn) VALUES ('"+namn+"')");
+        stmt.execute();
+        stmt.close();
+        connection.close();
     }
 
 }

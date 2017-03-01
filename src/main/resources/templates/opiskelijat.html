@@ -10,15 +10,16 @@
         <h1>Hej folk!</h1>
 
         <ol>
-            <li th:each="opiskelija: ${opiskelijat}">
-                <span th:text="${opiskelija.nimi}">opiskelijan nimi</span> <a th:href="${'/opiskelijat/' + opiskelija.id}">link</a>
+            <li th:each="trad: ${tradar}">
+                <p><a th:href="${'/' + trad.id}"><span th:text="${trad.namn}">1</span></a>
+                <span th:text="${trad.antal}">Essi esimerkki</span></p>
             </li>
            
             
         </ol>
-        <p>Lägg till användare:</p>
+        <p>Lägg till tråd:</p>
         <form method="POST">
-            <input type="text" name ="Namn"/>
+            <input type="text" name ="Name"/>
             <input type="submit" value="Lägg till."/>
         </form>
     </body>

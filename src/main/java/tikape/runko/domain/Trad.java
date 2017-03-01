@@ -23,11 +23,11 @@ public class Trad {
         this.id = newId;
     }
     
-    public String getName() {
+    public String getNamn() {
         return namn;
     }
     
-    public void setName(String newName) {
+    public void setNamn(String newName) {
         this.namn = newName;
     }
     
@@ -38,6 +38,8 @@ public class Trad {
     public void addPost() {
         antal++;
     }
+    
+    
     
     
 }
