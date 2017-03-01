@@ -12,5 +12,14 @@
         <p>och ... <span th:text="${viesti}">jotain?</span></p>
 
         <p><a href="/opiskelijat">Int vet jag.</a></p>
+        
+        <ul>
+            <li th:each="amne: ${amnen}">
+                <p><a href="/opiskelijat"><span th:text="${amne.id}">1</span></a></p>
+                <span th:text="${amne.antal}">Essi esimerkki</span>
+                <span th:text="${amne.date}">Essi esimerkki</span>
+            </li>
+        </ul>
+
     </body>
 </html>
