@@ -13,7 +13,6 @@ public class Meddelande {
     public Meddelande(String namn, String substans) {
         this.namn = namn;
         this.substans = substans;
-        this.tid = Date.
     }
     
     

@@ -6,6 +6,7 @@ import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AmneDao;
 import tikape.runko.database.Database;
+import tikape.runko.database.TradDao;
 
 public class Main {
 
@@ -14,6 +15,7 @@ public class Main {
 //        database.init();
 
         AmneDao amnen = new AmneDao(database);
+        TradDao tradar = new TradDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -24,12 +26,12 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-//        get("/amne:id", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("opiskelijat", opiskelijaDao.findAll());
-//
-//            return new ModelAndView(map, "opiskelijat");
-//        }, new ThymeleafTemplateEngine());
+        get("/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("opiskelijat", tradar.findAll());
+
+            return new ModelAndView(map, "opiskelijat");
+        }, new ThymeleafTemplateEngine());
 //
 //        get("/opiskelijat/:id", (req, res) -> {
 //            HashMap map = new HashMap<>();
