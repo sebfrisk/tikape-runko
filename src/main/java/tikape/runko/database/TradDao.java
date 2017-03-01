@@ -16,10 +16,10 @@ public class TradDao implements Dao<Trad, Integer> {
         this.database = database;
     }
 
-    @Override
-    public List<Trad> findAll() throws SQLException {
+    public List<Trad> findAll(String amne) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad WHERE amne = ?");
+        stmt.setString(1, amne);
 
         ResultSet rs = stmt.executeQuery();
         List<Trad> tradar = new ArrayList<>();
@@ -71,6 +71,11 @@ public class TradDao implements Dao<Trad, Integer> {
         stmt.execute();
         stmt.close();
         connection.close();
+    }
+
+    @Override
+    public List<Trad> findAll() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

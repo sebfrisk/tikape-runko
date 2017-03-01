@@ -16,7 +16,10 @@ public class Main {
 
         AmneDao amnen = new AmneDao(database);
         TradDao tradar = new TradDao(database);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 64520b3f598b8bab09154be6b19f111f4a70fdd9
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -28,7 +31,11 @@ public class Main {
 
         get("/:id", (req, res) -> {
             HashMap map = new HashMap<>();
+<<<<<<< HEAD
             map.put("tradar", tradar.findAll());
+=======
+            map.put("opiskelijat", tradar.findAll());
+>>>>>>> 64520b3f598b8bab09154be6b19f111f4a70fdd9
 
             return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());
