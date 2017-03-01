@@ -49,7 +49,7 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
     public List<Opiskelija> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Amne");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija");
 
         ResultSet rs = stmt.executeQuery();
         List<Opiskelija> opiskelijat = new ArrayList<>();

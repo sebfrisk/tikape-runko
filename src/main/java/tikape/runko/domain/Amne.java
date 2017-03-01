@@ -18,4 +18,16 @@ public class Amne {
         this.antal = antal;
         this.senaste = senaste;
     }
+    
+    public String getId() {
+        return this.namn;
+    }
+    
+    public int getAntal() {
+        return this.antal;
+    }
+    
+    public Date getDate() {
+        return this.senaste;
+    }
 }

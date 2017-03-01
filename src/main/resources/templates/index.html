@@ -9,8 +9,19 @@
     <body>
         <h1>Välkommen till dåliga forumet!</h1>
 
-        <p>och ... <span th:text="${viesti}">jotain?</span></p>
+        <ul>
+            <li th:each="amne: ${amnen}">
+                <p><a th:href="${'/' + amne.id}"><span th:text="${amne.id}">1</span></a>
+                <span th:text="${amne.antal}">Essi esimerkki</span>
+                <span th:text="${amne.date}">Essi esimerkki</span></p>
+            </li>
+        </ul>
+        
+        <p>Lägg till ämne:</p>
+        <form method="POST">
+            <input type="text" name ="Namn"/>
+            <input type="submit" value="Lägg till."/>
+        </form>
 
-        <p><a href="/opiskelijat">Int vet jag.</a></p>
     </body>
 </html>

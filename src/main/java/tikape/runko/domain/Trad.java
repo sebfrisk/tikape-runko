@@ -1,14 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tikape.runko.domain;
 
-/**
- *
- * @author sebfrisk
- */
+
+
+
 public class Trad {
+    private int id;
+    private String namn;
+    private int antal;
+    
+    public Trad(int id, String namn) {
+        this.id = id;
+        this.namn = namn;
+        this.antal = 0;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int newId) {
+        this.id = newId;
+    }
+    
+    public String getNamn() {
+        return namn;
+    }
+    
+    public void setNamn(String newName) {
+        this.namn = newName;
+    }
+    
+    public int getAntal() {
+        return antal;
+    } 
+    
+    public void addPost() {
+        antal++;
+    }
+    
+    
+    
     
 }
