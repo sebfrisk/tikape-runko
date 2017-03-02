@@ -16,7 +16,7 @@
             </tr>
             <ul th:each="meddelande: ${meddelanden}">
                 <tr>
-                    <td style="white-space: pre-line;"> <span th:text="${meddelande.innehall}"/> </td>
+                    <td> <span th:text="${meddelande.innehall}"/> </td>
                     <td> <span th:text="${meddelande.anvandarnamn}"/></td>
                     <td> <span th:text="${meddelande.tid}"/></td>
                 </tr>
