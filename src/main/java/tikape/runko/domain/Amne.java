@@ -10,10 +10,10 @@ public class Amne {
     private int antal;
     private Timestamp date;
 
-    public Amne(String id, String namn) {
+    public Amne(String id, String namn, int antal) {
         this.id = id;
         this.namn = namn;
-        antal = 0;
+        this.antal = antal;
         date = null;
     }
 

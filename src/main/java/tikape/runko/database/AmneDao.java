@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tikape.runko.domain.Amne;
+import tikape.runko.domain.Trad;
 
 public class AmneDao implements Dao<Amne, Integer> {
 
@@ -57,8 +58,8 @@ public class AmneDao implements Dao<Amne, Integer> {
         while (rs.next()) {
             String id = Integer.toString(rs.getInt("id"));
             String namn = rs.getString("namn");
-
-            amnen.add(new Amne(id, namn));
+            int antal = count(id);
+            amnen.add(new Amne(id, namn, antal));
         }
 
         rs.close();
@@ -79,6 +80,15 @@ public class AmneDao implements Dao<Amne, Integer> {
         stmt.execute();
         stmt.close();
         connection.close();
+    }
+    
+    public int count(String id) throws SQLException {
+        TradDao temp = new TradDao(this.database);
+        int antal = 0;
+        for (Trad a: temp.findAll(id)) {
+            antal += temp.count(Integer.toString(a.getId()));
+        }
+        return antal;
     }
 
 }

@@ -31,12 +31,35 @@ public class MeddelandeDao implements Dao<Meddelande, Integer> {
         ResultSet rs = stmt.executeQuery();
         List<Meddelande> meddelanden = new ArrayList<>();
         while (rs.next()) {
-            String tradId = rs.getString("trad_id");
-            String innehall = rs.getString("innehall");
-            String namn = rs.getString("anvandarnamn");
-            Timestamp tid = rs.getTimestamp("tidpunkt");
+            String tradId = rs.getString("trad");
+            String innehall = rs.getString("text");
+            String namn = rs.getString("skrivare");
+            Timestamp tid = rs.getTimestamp("tid");
 
             meddelanden.add(new Meddelande(tradId, namn, innehall, tid));
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return meddelanden;
+    }
+    
+    public List findAll(String tradId) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Meddelande WHERE trad = ?");
+        stmt.setObject(1, tradId);
+
+        ResultSet rs = stmt.executeQuery();
+        List<Meddelande> meddelanden = new ArrayList<>();
+        while (rs.next()) {
+            String Id = rs.getString("trad");
+            String innehall = rs.getString("text");
+            String namn = rs.getString("skrivare");
+            Timestamp tid = rs.getTimestamp("tid");
+
+            meddelanden.add(new Meddelande(Id, namn, innehall, tid));
         }
 
         rs.close();
@@ -58,7 +81,7 @@ public class MeddelandeDao implements Dao<Meddelande, Integer> {
 
     public void addMessage(String tradId, String innehall, String namn) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Meddelande (trad_id, anvandarnamn, innehall, tidpunkt) VALUES (?, ?, ?, ?)");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Meddelande (trad, skrivare, text, tid) VALUES (?, ?, ?, ?)");
         stmt.setString(1, tradId);
         stmt.setString(2, namn);
         stmt.setString(3, innehall);

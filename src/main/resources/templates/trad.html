@@ -19,7 +19,7 @@
 
             <ul th:each="trad: ${tradar}">
                 <tr>
-                    <td> <a th:href="${'/trad/' + trad.id}"><span th:text="${trad.namn}">1</span></a> </td>
+                    <td> <a th:href="${'/trad/' + trad.id}"><span th:text="${trad.namn}"></span></a> </td>
                     <td> <span th:text="${trad.antal}"> </span> </td>
                 </tr>
             </ul>
@@ -30,7 +30,7 @@
             <p>Rubrik</p>
             <input type="text" name ="Name"/>
             <p>Inlägg</p>
-            <p><textarea></textarea></p>
+            <p><textarea name="innehall" rows="7" cols="60"></textarea></p>
             <p>Signatur</p>
             <input type="text" name ="Signatur"/>
             <input type="submit" value="Lägg till."/>

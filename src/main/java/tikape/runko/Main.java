@@ -35,9 +35,10 @@ public class Main {
             return new ModelAndView(map, "trad");
         }, new ThymeleafTemplateEngine());
 
-        get("/trad", (req, res) -> {
+        get("/trad/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("meddelanden", meddelanden.findAll());
+            String id = req.params("id");
+            map.put("meddelanden", meddelanden.findAll(id));
 
             return new ModelAndView(map, "meddelande");
 
@@ -57,16 +58,22 @@ public class Main {
         });
 
         post("/amne/:id", (req, res) -> {
-            tradar.addTrad(req.queryParams("Name"));
-            res.redirect("/");
-            return "ok";
+            String amneId = req.params("id");
+            String namn = req.queryParams("Name");
+            String innehall = req.queryParams("innehall");
+            String signatur = req.queryParams("Signatur");
+            int id = tradar.addTrad(amneId, namn);
+            meddelanden.addMessage(Integer.toString(id), innehall, signatur);
+            res.redirect("/trad/" + id);
+            return "";
         });
 
         post("/trad/:id", (req, res) -> {
             String tradId = req.params("id");
-            String innehall = "";
-            String namn = "";
+            String innehall = req.queryParams("innehall");
+            String namn = req.queryParams("Signatur");
             meddelanden.addMessage(tradId, innehall, namn);
+            res.redirect("/trad/" + tradId);
             return "";
         });
 

@@ -5,14 +5,15 @@ package tikape.runko.domain;
 
 
 public class Trad {
+    
     private int id;
     private String namn;
     private int antal;
     
-    public Trad(int id, String namn) {
+    public Trad(int id, String namn, int antal) {
         this.id = id;
         this.namn = namn;
-        this.antal = 0;
+        this.antal = antal;
     }
     
     public int getId() {
@@ -34,12 +35,5 @@ public class Trad {
     public int getAntal() {
         return antal;
     } 
-    
-    public void addPost() {
-        antal++;
-    }
-    
-    
-    
     
 }

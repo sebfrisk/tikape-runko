@@ -18,18 +18,17 @@ public class TradDao implements Dao<Trad, Integer> {
 
     public List<Trad> findAll(String id) throws SQLException {
         Connection connection = database.getConnection();
+
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad WHERE amne = ?");
         stmt.setObject(1, id);
-
         ResultSet rs = stmt.executeQuery();
         List<Trad> tradar = new ArrayList<>();
         while (rs.next()) {
             Integer tunnus = rs.getInt("id");
             String nimi = rs.getString("namn");
-
-            tradar.add(new Trad(tunnus, nimi));
+            int antal = count(Integer.toString(tunnus));
+            tradar.add(new Trad(tunnus, nimi, antal));
         }
-
         rs.close();
         stmt.close();
         connection.close();
@@ -56,7 +55,7 @@ public class TradDao implements Dao<Trad, Integer> {
         Integer id = rs.getInt("id");
         String nimi = rs.getString("nimi");
 
-        Trad o = new Trad(id, nimi);
+        Trad o = new Trad(id, nimi, 0);
 
         rs.close();
         stmt.close();
@@ -64,13 +63,21 @@ public class TradDao implements Dao<Trad, Integer> {
 
         return o;
     }
-    
-    public void addTrad(String namn) throws SQLException {
+
+    public Integer addTrad(String amneId, String namn) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Trad (namn) VALUES ('"+namn+"')");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Trad (amne, namn) VALUES (?, ?)");
+        stmt.setObject(1, amneId);
+        stmt.setObject(2, namn);
         stmt.execute();
         stmt.close();
+        PreparedStatement count = connection.prepareStatement("SELECT COUNT(*) AS x FROM Trad");
+        ResultSet rs = count.executeQuery();
+        Integer antal = rs.getInt("x");
+        rs.close();
+        count.close();
         connection.close();
+        return antal;
     }
 
     @Override
@@ -84,7 +91,7 @@ public class TradDao implements Dao<Trad, Integer> {
             Integer id = rs.getInt("id");
             String nimi = rs.getString("namn");
 
-            tradar.add(new Trad(id, nimi));
+            tradar.add(new Trad(id, nimi, 0));
         }
 
         rs.close();
@@ -92,6 +99,11 @@ public class TradDao implements Dao<Trad, Integer> {
         connection.close();
 
         return tradar;
+    }
+    
+    public int count(String id) throws SQLException {
+        MeddelandeDao temp = new MeddelandeDao(this.database);
+        return temp.findAll(id).size();
     }
 
 }

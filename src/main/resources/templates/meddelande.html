@@ -7,19 +7,27 @@
     </head>
 
     <body>
-        <ul>
-            <li th:each="meddelande: ${meddelanden}">
-                <p><span th:text="${meddelande.innehall}"></span>
-                    <span> || </span>
-                    <span th:text="${meddelande.anvandarnamn}"></span>
-                    <span th:text="${meddelande.tid}"/></p>
-            </li>
-        </ul>
+
+        <table>
+            <tr>
+                <td> <b> Meddelande </b> </td>
+                <td> <b> Signatur </b> </td>
+                <td> <b> Tid </b> </td>
+            </tr>
+            <ul th:each="meddelande: ${meddelanden}">
+                <tr>
+                    <td> <span th:text="${meddelande.innehall}"/> </td>
+                    <td> <span th:text="${meddelande.anvandarnamn}"/></td>
+                    <td> <span th:text="${meddelande.tid}"/></td>
+                </tr>
+
+            </ul>
+        </table>
         <p>Lägg till meddelande:</p>
         <form method="POST">
-            <p>Inlägg</p>
+            <p>Inlägg:</p>
             <p><textarea name="innehall" rows="5" cols="80"/></p>
-            <p>Signatur</p>
+            <p>Signatur:</p>
             <input type="text" name ="Signatur"/>
             <input type="submit" value="Lägg till."/>
 
