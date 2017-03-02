@@ -42,7 +42,7 @@ public class AmneDao implements Dao<Amne, Integer> {
 //        rs.close();
 //        stmt.close();
 //        connection.close();
-//
+// @{~/amne/{id}(id = ${amne.id})}
         return null;
     }
 
@@ -55,11 +55,10 @@ public class AmneDao implements Dao<Amne, Integer> {
         ResultSet rs = stmt.executeQuery();
         List<Amne> amnen = new ArrayList<>();
         while (rs.next()) {
+            String id = Integer.toString(rs.getInt("id"));
             String namn = rs.getString("namn");
-            int antal = rs.getInt("antal");
-            Date date = rs.getDate("senaste");
 
-            amnen.add(new Amne(namn, antal, date));
+            amnen.add(new Amne(id, namn));
         }
 
         rs.close();

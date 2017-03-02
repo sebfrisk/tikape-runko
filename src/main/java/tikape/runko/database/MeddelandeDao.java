@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,16 +26,17 @@ public class MeddelandeDao implements Dao<Meddelande, Integer> {
     @Override
     public List findAll() throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT innehall, anvandarnamn FROM Meddelande");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Meddelande");
 
         ResultSet rs = stmt.executeQuery();
         List<Meddelande> meddelanden = new ArrayList<>();
         while (rs.next()) {
+            String tradId = rs.getString("trad_id");
             String innehall = rs.getString("innehall");
             String namn = rs.getString("anvandarnamn");
-            Date tid = null;
+            Timestamp tid = rs.getTimestamp("tidpunkt");
 
-            meddelanden.add(new Meddelande(namn, innehall, tid));
+            meddelanden.add(new Meddelande(tradId, namn, innehall, tid));
         }
 
         rs.close();
@@ -54,9 +56,15 @@ public class MeddelandeDao implements Dao<Meddelande, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void addMessage(String innehall, String namn) throws SQLException {
+    public void addMessage(String tradId, String innehall, String namn) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Meddelande (trad_id, anvandarnamn, innehall) VALUES (id, "+namn+", "+innehall+")");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Meddelande (trad_id, anvandarnamn, innehall, tidpunkt) VALUES (?, ?, ?, ?)");
+        stmt.setString(1, tradId);
+        stmt.setString(2, namn);
+        stmt.setString(3, innehall);
+        stmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+        
+        stmt.execute();
         stmt.close();
         connection.close();
     }

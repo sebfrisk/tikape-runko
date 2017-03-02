@@ -3,18 +3,22 @@ package tikape.runko;
 import java.util.HashMap;
 import spark.ModelAndView;
 import static spark.Spark.*;
+import java.sql.Timestamp;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.AmneDao;
 import tikape.runko.database.Database;
+import tikape.runko.database.MeddelandeDao;
 import tikape.runko.database.TradDao;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        System.out.println(new Timestamp(System.currentTimeMillis()));
         Database database = new Database("jdbc:sqlite:forum.db");
 
         AmneDao amnen = new AmneDao(database);
         TradDao tradar = new TradDao(database);
+        MeddelandeDao meddelanden = new MeddelandeDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -23,11 +27,20 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-        get("/:id", (req, res) -> {
+        get("/amne/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("tradar", tradar.findAll());
+            String id = req.params("id");
+            map.put("tradar", tradar.findAll(id));
 
-            return new ModelAndView(map, "opiskelijat");
+            return new ModelAndView(map, "trad");
+        }, new ThymeleafTemplateEngine());
+
+        get("/trad", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("meddelanden", meddelanden.findAll());
+
+            return new ModelAndView(map, "meddelande");
+
         }, new ThymeleafTemplateEngine());
 //
 //        get("/opiskelijat/:id", (req, res) -> {
@@ -43,10 +56,19 @@ public class Main {
             return "ok";
         });
 
-        post("/:id", (req, res) -> {
+        post("/amne/:id", (req, res) -> {
             tradar.addTrad(req.queryParams("Name"));
             res.redirect("/");
             return "ok";
         });
+
+        post("/trad/:id", (req, res) -> {
+            String tradId = req.params("id");
+            String innehall = "";
+            String namn = "";
+            meddelanden.addMessage(tradId, innehall, namn);
+            return "";
+        });
+
     }
 }

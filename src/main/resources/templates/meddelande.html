@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>ForumForum</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <ul>
+            <li th:each="meddelande: ${meddelanden}">
+                <p><span th:text="${meddelande.innehall}"></span>
+                    <span> || </span>
+                    <span th:text="${meddelande.anvandarnamn}"></span>
+                    <span th:text="${meddelande.tid}"/></p>
+            </li>
+        </ul>
+        <p>Lägg till meddelande:</p>
+        <form method="POST">
+            <p>Inlägg</p>
+            <p><textarea name="innehall" rows="5" cols="80"/></p>
+            <p>Signatur</p>
+            <input type="text" name ="Signatur"/>
+            <input type="submit" value="Lägg till."/>
+
+        </form>
+
+
+    </body>
+</html>

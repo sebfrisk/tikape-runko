@@ -7,7 +7,9 @@
     </head>
 
     <body>
-        <h1>Välkommen till dåliga forumet!</h1>
+        <h1>ushc fy</h1>
+
+
         <table>
             <tr>
                 <td> <b> Namn </b> </td>
@@ -15,26 +17,24 @@
                 <td> <b> Senaste post </b> </td>
             </tr>
 
-
-            <ul th:each="amne: ${amnen}">
+            <ul th:each="trad: ${tradar}">
                 <tr>
-                    <td> <a th:href="${'/amne/' + amne.id}"> <span th:text="${amne.namn}"> </span> </a> </td>
-                    <td> <span th:text="${amne.antal}"> </span> </td>
-                    <td> <span th:text="${amne.date}"> </span> </td>
+                    <td> <a th:href="${'/trad/' + trad.id}"><span th:text="${trad.namn}">1</span></a> </td>
+                    <td> <span th:text="${trad.antal}"> </span> </td>
                 </tr>
             </ul>
         </table>
-        <br/>
-        <br/>
 
-
-
-
-        <p>Lägg till ämne:</p>
+        <p>Lägg till tråd:</p>
         <form method="POST">
-            <input type="text" name ="Namn"/>
+            <p>Rubrik</p>
+            <input type="text" name ="Name"/>
+            <p>Inlägg</p>
+            <p><textarea></textarea></p>
+            <p>Signatur</p>
+            <input type="text" name ="Signatur"/>
             <input type="submit" value="Lägg till."/>
-        </form>
 
+        </form>
     </body>
 </html>
