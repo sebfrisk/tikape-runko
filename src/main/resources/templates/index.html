@@ -2,20 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>ForumForum</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
         <h1>Välkommen till dåliga forumet!</h1>
+        <table>
+            <tr>
+                <td> <b> Namn </b> </td>
+                <td> <b> Antal </b> </td>
+                <td> <b> Senaste post </b> </td>
+            </tr>
 
-        <ul>
-            <li th:each="amne: ${amnen}">
-                <p><a th:href="${'/' + amne.id}"><span th:text="${amne.id}">1</span></a>
-                <span th:text="${amne.antal}">Essi esimerkki</span>
-                <span th:text="${amne.date}">Essi esimerkki</span></p>
-            </li>
-        </ul>
+            <ul th:each="amne: ${amnen}">
+                <tr>
+                    <td> <a th:href="@{~/amne/{id}(id = ${amne.id})}"> <span th:text="${amne.id}"> </span> </a> </td>
+                    <td> <span th:text="${amne.antal}"> </span> </td>
+                    <td> <span th:text="${amne.date}"> </span> </td>
+                </tr>
+            </ul>
+        </table>
+        
+        <br/>
+        <br/>
+        
         
         <p>Lägg till ämne:</p>
         <form method="POST">

@@ -2,25 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Otsikko</title>
+        <title>ForumForum</title>
         <meta charset="utf-8" />
     </head>
 
     <body>
-        <h1>Hej folk!</h1>
+        <h1 th:text = "${amne.namn}" />
 
-        <ol>
+        <ul>
             <li th:each="trad: ${tradar}">
                 <p><a th:href="${'/' + trad.id}"><span th:text="${trad.namn}">1</span></a>
                 <span th:text="${trad.antal}">Essi esimerkki</span></p>
             </li>
            
             
-        </ol>
+        </ul>
         <p>Lägg till tråd:</p>
         <form method="POST">
+            <p>Rubrik</p>
             <input type="text" name ="Name"/>
+            <p>Inlägg</p>
+            <p><textarea></textarea></p>
+            <p>Signatur</p>
+            <input type="text" name ="Signatur"/>
             <input type="submit" value="Lägg till."/>
+            
         </form>
     </body>
 </html>

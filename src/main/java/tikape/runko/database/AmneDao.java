@@ -56,10 +56,8 @@ public class AmneDao implements Dao<Amne, Integer> {
         List<Amne> amnen = new ArrayList<>();
         while (rs.next()) {
             String namn = rs.getString("namn");
-            int antal = rs.getInt("antal");
-            Date date = rs.getDate("senaste");
 
-            amnen.add(new Amne(namn, antal, date));
+            amnen.add(new Amne(namn));
         }
 
         rs.close();
