@@ -9,13 +9,21 @@
     <body>
         <h1>Välkommen till dåliga forumet!</h1>
 
-        <ul>
-            <li th:each="amne: ${amnen}">
-                <p><a th:href="${'/' + amne.id}"><span th:text="${amne.id}">1</span></a>
-                <span th:text="${amne.antal}">Essi esimerkki</span>
-                <span th:text="${amne.date}">Essi esimerkki</span></p>
-            </li>
-        </ul>
+        <table>
+            <tr>
+                <td> <b> Namn </b> </td>
+                <td> <b> Antal </b> </td>
+                <td> <b> Senaste post </b> </td>
+            </tr>
+            
+            <ul th:each="amne: ${amnen}">
+                <tr>
+                    <td> <a th:href="${'/amne/' + amne.id}"><span th:text="${amne.namn}"> </span> </a> </td>
+                </tr>
+            </ul>
+        </table>
+        
+        
         
         <p>Lägg till ämne:</p>
         <form method="POST">

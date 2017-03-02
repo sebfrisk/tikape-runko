@@ -9,14 +9,20 @@
     <body>
         <h1>Hej folk!</h1>
 
-        <ol>
-            <li th:each="trad: ${tradar}">
-                <p><a th:href="${'/' + trad.id}"><span th:text="${trad.namn}">1</span></a>
-                <span th:text="${trad.antal}">Essi esimerkki</span></p>
-            </li>
-           
+        <table>
+            <tr>
+                <td> <b> Namn </b> </td>
+                <td> <b> Antal </b> </td>
+                <td> <b> Senaste post </b> </td>
+            </tr>
             
-        </ol>
+            <ul th:each="trad: ${tradar}">
+                <tr>
+                    <td> <a th:href="${'/amne/trad/' + trad.id}"><span th:text="${trad.namn}">1</span></a> </td>
+                    <td> <span th:text="${trad.antal}"> </span> </td>
+                </tr>
+            </ul>
+        </table>
         <p>Lägg till tråd:</p>
         <form method="POST">
             <input type="text" name ="Name"/>

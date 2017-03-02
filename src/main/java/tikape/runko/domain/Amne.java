@@ -4,30 +4,24 @@ package tikape.runko.domain;
 import java.util.*;
 
 public class Amne {
+    private int id;
     private String namn;
-    private int antal;
-    private Date senaste;
     
     public Amne(String namn) {
         this.namn = namn;
-        this.antal = 0;
     }
     
-    public Amne(String namn, int antal, Date senaste) {
+    public Amne(int id, String namn) {
+        this.id = id;
         this.namn = namn;
-        this.antal = antal;
-        this.senaste = senaste;
     }
     
-    public String getId() {
+    public int getId() {
+        return this.id;
+    }
+    
+    public String getNamn() {
         return this.namn;
     }
-    
-    public int getAntal() {
-        return this.antal;
-    }
-    
-    public Date getDate() {
-        return this.senaste;
-    }
+
 }

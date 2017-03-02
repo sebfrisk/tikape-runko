@@ -23,10 +23,11 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-        get("/:id", (req, res) -> {
+        get("/amne/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("tradar", tradar.findAll());
-
+            String id = req.params("id");
+            map.put("tradar", tradar.findAll(id));
+            
             return new ModelAndView(map, "opiskelijat");
         }, new ThymeleafTemplateEngine());
 //
