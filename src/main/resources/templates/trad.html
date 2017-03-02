@@ -7,16 +7,24 @@
     </head>
 
     <body>
-        <h1 th:text = "${amne.namn}" />
+        <h1>ushc fy</h1>
 
-        <ul>
-            <li th:each="trad: ${tradar}">
-                <p><a th:href="${'/' + trad.id}"><span th:text="${trad.namn}">1</span></a>
-                <span th:text="${trad.antal}">Essi esimerkki</span></p>
-            </li>
-           
-            
-        </ul>
+
+        <table>
+            <tr>
+                <td> <b> Namn </b> </td>
+                <td> <b> Antal </b> </td>
+                <td> <b> Senaste post </b> </td>
+            </tr>
+
+            <ul th:each="trad: ${tradar}">
+                <tr>
+                    <td> <a th:href="${'/trad/' + trad.id}"><span th:text="${trad.namn}">1</span></a> </td>
+                    <td> <span th:text="${trad.antal}"> </span> </td>
+                </tr>
+            </ul>
+        </table>
+
         <p>Lägg till tråd:</p>
         <form method="POST">
             <p>Rubrik</p>
@@ -26,7 +34,7 @@
             <p>Signatur</p>
             <input type="text" name ="Signatur"/>
             <input type="submit" value="Lägg till."/>
-            
+
         </form>
     </body>
 </html>

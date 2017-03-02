@@ -16,18 +16,18 @@ public class TradDao implements Dao<Trad, Integer> {
         this.database = database;
     }
 
-    public List<Trad> findAll(String amne) throws SQLException {
+    public List<Trad> findAll(String id) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad WHERE amne = ?");
-        stmt.setString(1, amne);
+        stmt.setObject(1, id);
 
         ResultSet rs = stmt.executeQuery();
         List<Trad> tradar = new ArrayList<>();
         while (rs.next()) {
-            Integer id = rs.getInt("id");
+            Integer tunnus = rs.getInt("id");
             String nimi = rs.getString("namn");
 
-            tradar.add(new Trad(id, nimi));
+            tradar.add(new Trad(tunnus, nimi));
         }
 
         rs.close();

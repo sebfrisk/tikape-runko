@@ -29,16 +29,18 @@ public class Main {
 
         get("/amne/:id", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("tradar", tradar.findAll());
+            String id = req.params("id");
+            map.put("tradar", tradar.findAll(id));
 
             return new ModelAndView(map, "trad");
         }, new ThymeleafTemplateEngine());
-        
+
         get("/trad", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("meddelanden", meddelanden.findAll());
 
             return new ModelAndView(map, "meddelande");
+
         }, new ThymeleafTemplateEngine());
 //
 //        get("/opiskelijat/:id", (req, res) -> {
@@ -59,7 +61,7 @@ public class Main {
             res.redirect("/");
             return "ok";
         });
-        
+
         post("/trad/:id", (req, res) -> {
             String tradId = req.params("id");
             String innehall = "";
@@ -67,6 +69,6 @@ public class Main {
             meddelanden.addMessage(tradId, innehall, namn);
             return "";
         });
-               
+
     }
 }

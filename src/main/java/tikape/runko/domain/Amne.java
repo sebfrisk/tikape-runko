@@ -5,19 +5,20 @@ import java.util.*;
 
 public class Amne {
 
-    private Integer id;
+    private String id;
     private String namn;
     private int antal;
     private Timestamp date;
 
-    public Amne(String namn) {
+    public Amne(String id, String namn) {
+        this.id = id;
         this.namn = namn;
         antal = 0;
         date = null;
     }
 
     public String getId() {
-        return this.namn;
+        return this.id;
     }
 
     public String getNamn() {
@@ -31,5 +32,4 @@ public class Amne {
     public Timestamp getDate() {
         return this.date;
     }
-
 }

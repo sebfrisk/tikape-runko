@@ -15,19 +15,21 @@
                 <td> <b> Senaste post </b> </td>
             </tr>
 
+
             <ul th:each="amne: ${amnen}">
                 <tr>
-                    <td> <a th:href="@{~/amne/{id}(id = ${amne.id})}"> <span th:text="${amne.id}"> </span> </a> </td>
+                    <td> <a th:href="${'/amne/' + amne.id}"> <span th:text="${amne.namn}"> </span> </a> </td>
                     <td> <span th:text="${amne.antal}"> </span> </td>
                     <td> <span th:text="${amne.date}"> </span> </td>
                 </tr>
             </ul>
         </table>
-        
         <br/>
         <br/>
-        
-        
+
+
+
+
         <p>Lägg till ämne:</p>
         <form method="POST">
             <input type="text" name ="Namn"/>
