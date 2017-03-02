@@ -13,6 +13,10 @@ import tikape.runko.database.TradDao;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        if (System.getenv("PORT") != null) {
+            port(Integer.valueOf(System.getenv("PORT")));
+        }
         System.out.println(new Timestamp(System.currentTimeMillis()));
         Database database = new Database("jdbc:sqlite:forum.db");
 
