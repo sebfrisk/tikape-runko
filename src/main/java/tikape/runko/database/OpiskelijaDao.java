@@ -47,6 +47,7 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
 
     @Override
     public List<Opiskelija> findAll() throws SQLException {
+
         Connection connection = database.getConnection();
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija");
 
@@ -70,5 +71,10 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
     public void delete(Integer key) throws SQLException {
         // ei toteutettu
     }
+
+//    @Override
+//    public List<Opiskelija> findAll() throws SQLException {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
 }
