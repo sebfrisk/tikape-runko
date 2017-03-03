@@ -24,28 +24,25 @@ public class AmneDao implements Dao<Amne, Integer> {
         this.database = database;
     }
 
-    @Override
-    public Amne findOne(Integer key) throws SQLException {
-//        Connection connection = database.getConnection();
-//        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Amne WHERE namn = ?");
-//        stmt.setObject(1, key);
-//
-//        ResultSet rs = stmt.executeQuery();
-//        boolean hasOne = rs.next();
-//        if (!hasOne) {
-//            return null;
-//        }
-//
-//        Integer id = rs.getInt("id");
-//        String nimi = rs.getString("nimi");
-//
-//        Opiskelija o = new Opiskelija(id, nimi);
-//
-//        rs.close();
-//        stmt.close();
-//        connection.close();
-// @{~/amne/{id}(id = ${amne.id})}
-        return null;
+    public Amne findOne(String id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Amne WHERE id = ?");
+        stmt.setObject(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        String namn = rs.getString("namn");
+
+        Amne o = new Amne(namn);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+        return o;
     }
 
     @Override
@@ -66,17 +63,7 @@ public class AmneDao implements Dao<Amne, Integer> {
         rs.close();
         stmt.close();
         connection.close();
-//        
-//        connection = database.getConnection();
-//        PreparedStatement updateTime = connection.prepareStatement("SELECT tid FROM Meddelande, Trad WHERE Trad.amne = ? AND Meddelande.trad = Trad.id ORDER BY tid DESC LIMIT 1");
-//        for (Amne a: amnen) {
-//            updateTime.setObject(1, a.getId());
-//            ResultSet time = updateTime.executeQuery();
-//            a.setTid(time.getTimestamp("tid"));
-//            time.close();
-//        }
-//        updateTime.close();
-//        connection.close();
+
 
         return amnen;
     }
@@ -115,6 +102,11 @@ public class AmneDao implements Dao<Amne, Integer> {
 //        return latest;
 //        
 //    }
+
+    @Override
+    public Amne findOne(Integer key) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
 

@@ -20,7 +20,7 @@ public class TradDao implements Dao<Trad, Integer> {
     public List<Trad> findAll(String id) throws SQLException {
         Connection connection = database.getConnection();
 
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad WHERE amne = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad WHERE amne = ? ORDER BY senaste DESC LIMIT 10");
         stmt.setObject(1, id);
         ResultSet rs = stmt.executeQuery();
         List<Trad> tradar = new ArrayList<>();
@@ -64,6 +64,27 @@ public class TradDao implements Dao<Trad, Integer> {
         connection.close();
 
         return null;
+    }
+    
+    public Trad findOne(String id) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Trad WHERE id = ?");
+        stmt.setObject(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        String namn = rs.getString("namn");
+
+        Trad o = new Trad(namn);
+
+        rs.close();
+        stmt.close();
+        connection.close();
+        return o;
     }
 
     public Integer addTrad(String amneId, String namn) throws SQLException {

@@ -20,6 +20,10 @@ public class Trad {
         this.tid = tid;
     }
     
+    public Trad(String namn) {
+        this.namn = namn;
+    }
+    
     public int getId() {
         return id;
     }

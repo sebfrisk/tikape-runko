@@ -16,6 +16,10 @@ public class Amne {
         this.antal = antal;
         this.tid = tid;
     }
+    
+    public Amne(String namn) {
+        this.namn = namn;
+    }
 
     public String getId() {
         return this.id;

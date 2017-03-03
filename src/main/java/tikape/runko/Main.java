@@ -9,6 +9,7 @@ import tikape.runko.database.AmneDao;
 import tikape.runko.database.Database;
 import tikape.runko.database.MeddelandeDao;
 import tikape.runko.database.TradDao;
+import tikape.runko.domain.Amne;
 
 public class Main {
 
@@ -41,6 +42,7 @@ public class Main {
             HashMap map = new HashMap<>();
             String id = req.params("id");
             map.put("tradar", tradar.findAll(id));
+            map.put("amne", amnen.findOne(id));
 
             return new ModelAndView(map, "trad");
         }, new ThymeleafTemplateEngine());
@@ -49,6 +51,7 @@ public class Main {
             HashMap map = new HashMap<>();
             String id = req.params("id");
             map.put("meddelanden", meddelanden.findAll(id));
+            map.put("trad", tradar.findOne(id));
 
             return new ModelAndView(map, "meddelande");
 
