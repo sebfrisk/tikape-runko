@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +52,7 @@ public class AmneDao implements Dao<Amne, Integer> {
     public List<Amne> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Amne");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Amne LEFT JOIN (SELECT tid, amne FROM Meddelande, Trad where Meddelande.trad = Trad.id) ON amne = Amne.id GROUP BY namn ORDER BY namn");
 
         ResultSet rs = stmt.executeQuery();
         List<Amne> amnen = new ArrayList<>();
@@ -59,12 +60,23 @@ public class AmneDao implements Dao<Amne, Integer> {
             String id = Integer.toString(rs.getInt("id"));
             String namn = rs.getString("namn");
             int antal = count(id);
-            amnen.add(new Amne(id, namn, antal));
+            Timestamp tid = rs.getTimestamp("tid");
+            amnen.add(new Amne(id, namn, antal, tid));
         }
-
         rs.close();
         stmt.close();
         connection.close();
+//        
+//        connection = database.getConnection();
+//        PreparedStatement updateTime = connection.prepareStatement("SELECT tid FROM Meddelande, Trad WHERE Trad.amne = ? AND Meddelande.trad = Trad.id ORDER BY tid DESC LIMIT 1");
+//        for (Amne a: amnen) {
+//            updateTime.setObject(1, a.getId());
+//            ResultSet time = updateTime.executeQuery();
+//            a.setTid(time.getTimestamp("tid"));
+//            time.close();
+//        }
+//        updateTime.close();
+//        connection.close();
 
         return amnen;
     }
@@ -90,6 +102,19 @@ public class AmneDao implements Dao<Amne, Integer> {
         }
         return antal;
     }
+    
+//    public Timestamp getLatestPost(String id) throws SQLException {
+//        Connection connection = database.getConnection();
+//        PreparedStatement stmt = connection.prepareStatement("SELECT tid FROM Meddelande, Trad WHERE Trad.amne = ? AND Meddelande.trad = Trad.id ORDER BY tid DESC LIMIT 1");
+//        stmt.setObject(1, id);
+//        ResultSet rs = stmt.executeQuery();
+//        Timestamp latest = rs.getTimestamp("tid");
+//        rs.close();
+//        stmt.close();
+//        connection.close();
+//        return latest;
+//        
+//    }
 
 }
 

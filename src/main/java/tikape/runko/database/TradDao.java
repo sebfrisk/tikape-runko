@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Trad;
@@ -27,8 +28,10 @@ public class TradDao implements Dao<Trad, Integer> {
             Integer tunnus = rs.getInt("id");
             String nimi = rs.getString("namn");
             int antal = count(Integer.toString(tunnus));
-            tradar.add(new Trad(tunnus, nimi, antal));
+            Timestamp tid = rs.getTimestamp("senaste");
+            tradar.add(new Trad(tunnus, nimi, antal, tid));
         }
+        
         rs.close();
         stmt.close();
         connection.close();
@@ -55,13 +58,12 @@ public class TradDao implements Dao<Trad, Integer> {
         Integer id = rs.getInt("id");
         String nimi = rs.getString("nimi");
 
-        Trad o = new Trad(id, nimi, 0);
-
+//        Trad o = new Trad(id, nimi, 0);
         rs.close();
         stmt.close();
         connection.close();
 
-        return o;
+        return null;
     }
 
     public Integer addTrad(String amneId, String namn) throws SQLException {
@@ -91,7 +93,7 @@ public class TradDao implements Dao<Trad, Integer> {
             Integer id = rs.getInt("id");
             String nimi = rs.getString("namn");
 
-            tradar.add(new Trad(id, nimi, 0));
+//            tradar.add(new Trad(id, nimi, 0));
         }
 
         rs.close();
@@ -100,10 +102,23 @@ public class TradDao implements Dao<Trad, Integer> {
 
         return tradar;
     }
-    
+
     public int count(String id) throws SQLException {
         MeddelandeDao temp = new MeddelandeDao(this.database);
         return temp.findAll(id).size();
     }
+
+//    public Timestamp getLatestPost(Integer id) throws SQLException {
+//        Connection connection = database.getConnection();
+//        PreparedStatement stmt = connection.prepareStatement("SELECT tid FROM Meddelande WHERE trad = ? ORDER BY tid DESC LIMIT 1");
+//        stmt.setObject(1, id);
+//        ResultSet rs = stmt.executeQuery();
+//        Timestamp latest = rs.getTimestamp("tid");
+//        rs.close();
+//        stmt.close();
+//        connection.close();
+//        return latest;
+//
+//    }
 
 }

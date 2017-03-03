@@ -7,21 +7,20 @@
     </head>
 
     <body>
-
         <table>
             <tr>
                 <td> <b> Meddelande </b> </td>
                 <td> <b> Signatur </b> </td>
                 <td> <b> Tid </b> </td>
             </tr>
-            <ul th:each="meddelande: ${meddelanden}">
+            <ol th:each="meddelande: ${meddelanden}">
                 <tr>
-                    <td> <span th:text="${meddelande.innehall}"/> </td>
+                    <td style = "white-space:pre-line;"> <span th:text="${meddelande.innehall}"/> </td>
                     <td> <span th:text="${meddelande.anvandarnamn}"/></td>
                     <td> <span th:text="${meddelande.tid}"/></td>
                 </tr>
 
-            </ul>
+            </ol>
         </table>
         <p>Lägg till meddelande:</p>
         <form method="POST">

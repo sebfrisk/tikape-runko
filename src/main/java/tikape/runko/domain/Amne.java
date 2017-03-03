@@ -8,13 +8,13 @@ public class Amne {
     private String id;
     private String namn;
     private int antal;
-    private Timestamp date;
+    private Timestamp tid;
 
-    public Amne(String id, String namn, int antal) {
+    public Amne(String id, String namn, int antal, Timestamp tid) {
         this.id = id;
         this.namn = namn;
         this.antal = antal;
-        date = null;
+        this.tid = tid;
     }
 
     public String getId() {
@@ -29,7 +29,11 @@ public class Amne {
         return this.antal;
     }
 
-    public Timestamp getDate() {
-        return this.date;
+    public Timestamp getTid() {
+        return this.tid;
+    }
+    
+    public void setTid(Timestamp tid) {
+        this.tid = tid;
     }
 }

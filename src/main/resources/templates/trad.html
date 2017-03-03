@@ -7,7 +7,8 @@
     </head>
 
     <body>
-        <h1>ushc fy</h1>
+        <h1 th:text = "farför"/>
+        <a th:href="${'/'}">tillbaka </a>
 
 
         <table>
@@ -21,6 +22,7 @@
                 <tr>
                     <td> <a th:href="${'/trad/' + trad.id}"><span th:text="${trad.namn}"></span></a> </td>
                     <td> <span th:text="${trad.antal}"> </span> </td>
+                    <td> <span th:text="${trad.tid}"> </span> </td>
                 </tr>
             </ul>
         </table>

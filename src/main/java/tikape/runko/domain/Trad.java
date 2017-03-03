@@ -1,6 +1,8 @@
 
 package tikape.runko.domain;
 
+import java.sql.Timestamp;
+
 
 
 
@@ -9,11 +11,13 @@ public class Trad {
     private int id;
     private String namn;
     private int antal;
+    private Timestamp tid;
     
-    public Trad(int id, String namn, int antal) {
+    public Trad(int id, String namn, int antal, Timestamp tid) {
         this.id = id;
         this.namn = namn;
         this.antal = antal;
+        this.tid = tid;
     }
     
     public int getId() {
@@ -35,5 +39,9 @@ public class Trad {
     public int getAntal() {
         return antal;
     } 
+    
+    public Timestamp getTid() {
+        return tid;
+    }
     
 }
