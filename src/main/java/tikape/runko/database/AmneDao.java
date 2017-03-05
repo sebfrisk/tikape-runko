@@ -89,19 +89,6 @@ public class AmneDao implements Dao<Amne, Integer> {
         }
         return antal;
     }
-    
-//    public Timestamp getLatestPost(String id) throws SQLException {
-//        Connection connection = database.getConnection();
-//        PreparedStatement stmt = connection.prepareStatement("SELECT tid FROM Meddelande, Trad WHERE Trad.amne = ? AND Meddelande.trad = Trad.id ORDER BY tid DESC LIMIT 1");
-//        stmt.setObject(1, id);
-//        ResultSet rs = stmt.executeQuery();
-//        Timestamp latest = rs.getTimestamp("tid");
-//        rs.close();
-//        stmt.close();
-//        connection.close();
-//        return latest;
-//        
-//    }
 
     @Override
     public Amne findOne(Integer key) throws SQLException {
