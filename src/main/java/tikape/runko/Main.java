@@ -56,13 +56,6 @@ public class Main {
             return new ModelAndView(map, "meddelande");
 
         }, new ThymeleafTemplateEngine());
-//
-//        get("/opiskelijat/:id", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
-//
-//            return new ModelAndView(map, "opiskelija");
-//        }, new ThymeleafTemplateEngine());
 
         post("/", (req, res) -> {
             amnen.addAmne(req.queryParams("Namn"));
