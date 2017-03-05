@@ -129,17 +129,4 @@ public class TradDao implements Dao<Trad, Integer> {
         return temp.findAll(id).size();
     }
 
-//    public Timestamp getLatestPost(Integer id) throws SQLException {
-//        Connection connection = database.getConnection();
-//        PreparedStatement stmt = connection.prepareStatement("SELECT tid FROM Meddelande WHERE trad = ? ORDER BY tid DESC LIMIT 1");
-//        stmt.setObject(1, id);
-//        ResultSet rs = stmt.executeQuery();
-//        Timestamp latest = rs.getTimestamp("tid");
-//        rs.close();
-//        stmt.close();
-//        connection.close();
-//        return latest;
-//
-//    }
-
 }
